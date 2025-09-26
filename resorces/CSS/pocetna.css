@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    scroll-behavior: smooth;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden; /* uklanja horizontalni scroll */
+}
+
+/* Flex layout da footer bude uvek na dnu */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5cm;
+    background-color: #FAF1E2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 0 1rem;
+}
+
+header .logo img {
+    height: 70%;
+    max-height: 2cm;
+    object-fit: contain;
+}
+
+header .site-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(57, 53, 3);
+    font-size: clamp(0.6rem, 2vw, 1.3rem);
+    font-weight: bold;
+    user-select: none;
+    pointer-events: none;
+    text-align: center;
+}
+
+/* HAMBURGER MENU */
+.menu {
+    position: relative;
+}
+
+.menu-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.menu-btn div {
+    width: 26px;
+    height: 3px;
+    background-color: black;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.menu-btn.open div:nth-child(1) { transform: rotate(45deg); }
+.menu-btn.open div:nth-child(2) { opacity: 0; }
+.menu-btn.open div:nth-child(3) { transform: rotate(-45deg); }
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #FAF1E2;
+    width: 200px;
+    list-style: none;
+    border: 1px solid white;
+    box-sizing: border-box;
+}
+
+.dropdown-menu li a {
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-menu li a:hover { background-color: #e67e22; }
+.dropdown-menu.show { display: block; }
+
+/* MAIN CONTENT */
+main {
+    flex: 1;
+    margin-top: 2.5cm;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px;
+}
+
+.flex-container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.image-column {
+    flex: 1;
+    min-width: 300px;
+}
+
+.image-column img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.text-column {
+    flex: 1.5;
+    min-width: 300px;
+}
+
+.text-column h2, .text-column h3 {
+    color: #2c3e50;
+    margin-top: 20px;
+}
+
+.text-column p, .text-column ul {
+    margin-top: 10px;
+}
+
+.text-column ul li {
+    margin-bottom: 8px;
+}
+
+.highlight {
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.btn-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: #e67e22;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #d35400;
+}
+
+/* FOOTER */
+footer {
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+footer .social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+footer .social-links a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+footer .social-links a:hover { text-decoration: underline; }
+
+/* MEDIA QUERIES */
+
+/* Tablet */
+@media (max-width: 992px) {
+    main { padding: 20px; }
+}
+
+/* Mobilni */
+@media (max-width: 600px) {
+    header { 
+        height: auto; 
+        flex-direction: column; 
+        align-items: flex-start; 
+        padding: 10px; 
+    }
+    header .site-name { 
+        position: static; 
+        transform: none; 
+        text-align: left; 
+        margin-top: 5px; 
+    }
+
+    /* Veći padding za main na mobilnom */
+    main { 
+        padding: 70px 20px; 
+        margin-top: 6rem; /* dovoljno prostora ispod headera */
+    }
+
+    .btn-primary { width: 100%; text-align: center; }
+
+    /* Popravka za hamburger meni */
+    .dropdown-menu {
+        position: fixed;
+        top: 6rem; /* odmah ispod headera */
+        left: 0;
+        right: 0;
+        width: auto;
+        margin: 0 10px;
+        border-radius: 8px;
+    }
+
+    .dropdown-menu li a {
+        padding: 12px 0;
+    }
+
+    .flex-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
